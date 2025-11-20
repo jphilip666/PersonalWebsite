@@ -1,7 +1,3 @@
-import { FaEnvelope } from "react-icons/fa6";
-import { FaLinkedin } from "react-icons/fa6";
-import { FaXTwitter } from "react-icons/fa6";
-import { Separator } from "@/components/ui/separator";
 import {
   Field,
   FieldDescription,
@@ -14,7 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 
 export default function Contact() {
-  return <div className="grid grid-col content-between h-160">
+  return <div className="grid grid-col content-center h-160">
     <div>
         <form>
             <FieldGroup>
@@ -42,32 +38,6 @@ export default function Contact() {
                 </FieldSet>
             </FieldGroup>
         </form>
-    </div>
-    
-    <div>        
-        <Separator className="my-4" />
-        <table className="mx-auto text-xs">
-            <tbody>
-                <tr>
-                    <td><FaEnvelope className="pe-3 size-8 text-yellow-500" /></td>
-                    <td className="text-left">
-                        <a href="mailto:jestin.philip@icloud.com">jestin.philip@icloud.com</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td><FaLinkedin className="pe-3 size-8 text-blue-500" /></td>
-                    <td className="text-left">
-                        <a href="https://www.linkedin.com/in/jestin-philip/">https://www.linkedin.com/in/jestin-philip/</a>                    
-                    </td>
-                </tr>
-                <tr>
-                    <td><FaXTwitter className="pe-3 size-8 text-white" /></td>
-                    <td className="text-left">
-                        <a href="https://twitter.com/jphilip777">https://twitter.com/jphilip777</a>                    
-                    </td>
-                </tr>
-            </tbody>
-        </table>
     </div>
   </div>;
 }
