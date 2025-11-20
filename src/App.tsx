@@ -1,26 +1,28 @@
 import './App.css';
 import { BrowserRouter, Link } from 'react-router-dom';
 import { Router } from './Router';
-import { FaAppStore } from "react-icons/fa";
+import {
+  Tabs,
+  TabsList,
+  TabsTrigger,
+} from "@/components/ui/tabs";
 
 function App() {
   return (
     <>
       <BrowserRouter>
-        <h1 className="text-5xl text-yellow-500 font-bold underline">
-          Hello world!
-          <FaAppStore />
-        </h1>
         {/* Navigation */}
-        <nav>
-          <Link to="/">Home</Link> |{" "}
-          <Link to="/about">About</Link> |{" "}
-          <Link to="/contact">Contact</Link>
-        </nav>
+        <Tabs defaultValue="home" className="mb-2">
+          <TabsList className="mx-auto bg-gray-500">
+              <Link to="/"><TabsTrigger value="home" className="w-28">Home</TabsTrigger></Link>
+              <Link to="/contact"><TabsTrigger value="contact" className="w-28">Contact</TabsTrigger></Link>
+          </TabsList>
+        </Tabs>
 
         {/* Routes */}
-        <Router/>
-
+        <div className="border rounded-lg min-h-176 min-w-150 p-6 shadow-lg">
+          <Router />
+        </div>
       </BrowserRouter>
     </>
   )
