@@ -43,9 +43,9 @@ export default function Home() {
     </div>
     <Separator className="my-4" />
     <div>
-        <p>A versatile Senior SoFware Engineer & Web Developer, specialising in JavaScript (TypeScript, Node.js, React.js), PHP
+        <p>A versatile Senior Software Engineer & Web Developer, specialising in JavaScript (TypeScript, Node.js, React.js), PHP
         (Laravel) and AWS cloud solutions. Adept at clean, maintainable code, CI/CD automation, and Agile/Scrum development.
-        Drives innovation, opAmises cloud-native solutions, and mentors' teams to deliver high-performance, future-proof
+        Drives innovation, opAmises cloud-native solutions, and mentors teams to deliver high-performance, future-proof
         applications. Passionate about emerging technologies, security best practices (OWASP), and strategic problem-solving.</p>
     </div>    
     <div>
