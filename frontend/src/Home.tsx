@@ -40,7 +40,7 @@ export default function Home() {
                 </tr>
             </table>
         </div> 
-    </div>
+    </div> 
     <Separator className="my-4" />
     <div>
         <p>A versatile Senior Software Engineer & Web Developer, specialising in JavaScript (TypeScript, Node.js, React.js), PHP
