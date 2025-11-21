@@ -39,7 +39,7 @@ export default function Home() {
                     </td>
                 </tr>
             </table>
-        </div>
+        </div> 
     </div>
     <Separator className="my-4" />
     <div>
