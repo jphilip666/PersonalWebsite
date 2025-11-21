@@ -29,7 +29,7 @@ export default function Home() {
                 <tr>
                     <td className="align-middle"> 
                         <a href="https://www.linkedin.com/in/jestin-philip/" className="px-2 hover:bg-gray-600 hover:rounded block w-full">
-                            <FaLinkedin className="pe-3 size-7 text-blue-500 inline" />https://www.linkedin.com/in/jestin-philip/
+                            <FaLinkedin className="pe-3 size-7 text-blue-500 inline" />https://www.linkedin.com/in/jestin-philip
                         </a>
                     </td>
                     <td className="align-middle">
