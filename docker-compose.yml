@@ -5,4 +5,4 @@ services:
       dockerfile: Dockerfile
     container_name: personal_website_frontend
     ports:
-      - "3000:8080"        # React/Vite app served by Nginx
+      - "3000:8080"
