@@ -1,5 +1,5 @@
 // use semantic-release to manage backend releases
-module.exports = {
+export default {
   branches: ['main'],
   tagFormat: 'backend-v${version}',
   plugins: [
