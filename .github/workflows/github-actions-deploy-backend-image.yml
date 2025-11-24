@@ -31,8 +31,8 @@ jobs:
       - name: Get backend version
         id: backend_version
         run: |
-          VERSION=$(git describe --tags --match "backend-v*" --abbrev=0)
-          VERSION=${VERSION#"backend-v"}
+          TAG=$(git describe --tags --match "backend-v*" --abbrev=0 2>/dev/null || echo "backend-v0.0.0")
+          VERSION=${TAG#"backend-v"}
           echo "version=$VERSION" >> $GITHUB_OUTPUT  
 
       # Log in to Docker Hub  

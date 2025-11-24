@@ -31,8 +31,8 @@ jobs:
       - name: Get frontend version
         id: frontend_version
         run: |
-          VERSION=$(git describe --tags --match "frontend-v*" --abbrev=0)
-          VERSION=${VERSION#"frontend-v"}
+          TAG=$(git describe --tags --match "frontend-v*" --abbrev=0 2>/dev/null || echo "frontend-v0.0.0")
+          VERSION=${TAG#"frontend-v"}
           echo "version=$VERSION" >> $GITHUB_OUTPUT
 
       # Log in to Docker Hub  
