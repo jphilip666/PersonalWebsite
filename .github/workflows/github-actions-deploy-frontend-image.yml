@@ -1,5 +1,9 @@
 name: Deploy Frontend Image
 run-name: ${{ github.actor }} is deploying a Frontend Docker image 🚀
+permissions:
+  contents: write   # allows git push / tag creation
+  packages: write
+  actions: read
 on:
   push:
     branches:
