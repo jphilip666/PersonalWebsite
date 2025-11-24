@@ -13,7 +13,7 @@ export default function Home() {
         <div>
             <h1 className="text-2xl font-light text-gray-400">Jestin Philip</h1>
             <h2 className="font-light text-gray-300">Senior Software Engineer & Web Developer</h2>
-        </div>
+        </div> 
         <div className="text-xs flex">
             <table>
                 <tr>
