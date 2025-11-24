@@ -1,5 +1,9 @@
 name: Deploy Backend Image
 run-name: ${{ github.actor }} is deploying a Backend Docker image 🚀
+permissions:
+  contents: write   # allows git push / tag creation
+  packages: write
+  actions: read
 on:
   push:
     branches:
