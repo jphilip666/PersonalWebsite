@@ -47,7 +47,7 @@ export default function Home() {
         (Laravel) and AWS cloud solutions. Adept at clean, maintainable code, CI/CD automation, and Agile/Scrum development.
         Drives innovation, opAmises cloud-native solutions, and mentors teams to deliver high-performance, future-proof
         applications. Passionate about emerging technologies, security best practices (OWASP), and strategic problem-solving.</p>
-    </div>    
+    </div>   
     <div>
         <h1 className="text-2xl font-light my-5">TECHNICAL EXPERTISE</h1>
         <Table className="w-full">
