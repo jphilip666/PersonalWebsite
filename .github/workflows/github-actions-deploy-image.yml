@@ -1,5 +1,5 @@
 name: Deploy Image
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+run-name: ${{ github.actor }} is deploying a Docker image 🚀
 on:
   push:
     branches:
@@ -24,7 +24,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: ./frontend
-          file: ./Dockerfile
+          file: Dockerfile
           push: true
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/frontend:latest
