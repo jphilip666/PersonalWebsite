@@ -1,4 +1,4 @@
-name: Deploy Image
+name: Deploy Backend Image
 run-name: ${{ github.actor }} is deploying a Backend Docker image 🚀
 on:
   push:
