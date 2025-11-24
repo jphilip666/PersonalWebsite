@@ -1,5 +1,5 @@
 // use semantic-release to manage frontend releases
-module.exports = {
+export default {
   branches: ['main'],
   tagFormat: 'frontend-v${version}',
   plugins: [
