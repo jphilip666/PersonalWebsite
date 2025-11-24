@@ -1,0 +1,62 @@
+name: Deploy Image
+run-name: ${{ github.actor }} is deploying a Backend Docker image 🚀
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'backend/**'  
+jobs:
+  Deploy-Image:
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Install dev dependencies
+      - name: Install dev deps
+        working-directory: ./backend
+        run: npm install --only=dev  
+
+      # Run semantic-release to determine the new version
+      - name: Run semantic-release
+        id: backend_release
+        run: npx semantic-release --extends ./backend/release.config.js
+        working-directory: ./backend
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
+      # Get the backend version from the latest tag    
+      - name: Get backend version
+        id: backend_version
+        run: |
+          TAG=$(git describe --tags --match "backend-v*" --abbrev=0 2>/dev/null || echo "backend-v0.0.0")
+          VERSION=${TAG#"backend-v"}
+          echo "version=$VERSION" >> $GITHUB_OUTPUT  
+
+      # Log in to Docker Hub  
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}  
+
+      # Get the Docker Buildx action set up  
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      # Build and push the Backend Docker image    
+      - name: Build and push backend image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./backend
+          file: ./backend/Dockerfile
+          push: true
+          tags: |
+            ${{ secrets.DOCKERHUB_USERNAME }}/personal-website-backend:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/personal-website-backend:${{ steps.backend_version.outputs.version }}
+
+      # Log out from Docker Hub
+      - name: Log out from Docker Hub
+        run: docker logout    
