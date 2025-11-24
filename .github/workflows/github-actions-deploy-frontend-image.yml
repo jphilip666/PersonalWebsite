@@ -1,0 +1,62 @@
+name: Deploy Image
+run-name: ${{ github.actor }} is deploying a Frontend Docker image 🚀
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'frontend/**'  
+jobs:
+  Deploy-Image:
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Install dev dependencies
+      - name: Install dev deps
+        working-directory: ./frontend
+        run: npm install --only=dev  
+
+      # Run semantic-release to determine the new version
+      - name: Run semantic-release
+        id: frontend_release
+        run: npx semantic-release --extends ./frontend/release.config.js
+        working-directory: ./frontend
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
+      # Get the frontend version from the latest tag    
+      - name: Get frontend version
+        id: frontend_version
+        run: |
+          VERSION=$(git describe --tags --match "frontend-v*" --abbrev=0)
+          VERSION=${VERSION#"frontend-v"}
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+      # Log in to Docker Hub  
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}  
+
+      # Get the Docker Buildx action set up  
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      # Build and push the Frontend Docker image    
+      - name: Build and push frontend image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./frontend
+          file: ./frontend/Dockerfile
+          push: true
+          tags: |
+            ${{ secrets.DOCKERHUB_USERNAME }}/personal-website-frontend:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/personal-website-frontend:${{ steps.frontend_version.outputs.version }}
+
+      # Log out from Docker Hub
+      - name: Log out from Docker Hub
+        run: docker logout    
