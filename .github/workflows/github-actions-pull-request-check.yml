@@ -1,5 +1,5 @@
 name: Status Check
-run-name: ${{ github.actor }} is running some tests out the pull request 🚀
+run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on:
   push:
     branches-ignore:
