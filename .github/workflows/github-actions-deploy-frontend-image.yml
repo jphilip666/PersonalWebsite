@@ -45,12 +45,12 @@ jobs:
       - name: Get frontend version
         id: frontend_version
         if: ${{ steps.semantic_release.outcome == 'success' }}
-        working-directory: ./backend
+        working-directory: ./frontend
         run: |
           if [ -f version.env ]; then
             cat version.env
             VERSION_RAW=$(grep VERSION version.env | cut -d '=' -f2)
-            VERSION=${VERSION_RAW#backend-v}
+            VERSION=${VERSION_RAW#frontend-v}
             echo "version=$VERSION" >> $GITHUB_OUTPUT
           fi
 
