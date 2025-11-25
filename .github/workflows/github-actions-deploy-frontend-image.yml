@@ -11,12 +11,16 @@ on:
     paths:
       - 'frontend/**'  
 jobs:
-  Deploy-Image:
+  release:
     runs-on: ubuntu-latest
+    outputs:
+      frontend_version: ${{ steps.frontend_version.outputs.version }}
     steps:
       # Checkout the repository
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       # Set up Node.js
       - name: Set up Node.js
@@ -31,19 +35,33 @@ jobs:
 
       # Run semantic-release to determine the new version
       - name: Run semantic-release
-        id: frontend_release
-        run: npx semantic-release --extends ./release.config.js
+        id: semantic_release        
         working-directory: ./frontend
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npx semantic-release
           
       # Get the frontend version from the latest tag    
       - name: Get frontend version
         id: frontend_version
+        if: ${{ steps.semantic_release.outcome == 'success' }}
+        working-directory: ./backend
         run: |
-          TAG=$(git describe --tags --match "frontend-v*" --abbrev=0 2>/dev/null || echo "frontend-v0.0.0")
-          VERSION=${TAG#"frontend-v"}
-          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          if [ -f version.env ]; then
+            cat version.env
+            VERSION_RAW=$(grep VERSION version.env | cut -d '=' -f2)
+            VERSION=${VERSION_RAW#backend-v}
+            echo "version=$VERSION" >> $GITHUB_OUTPUT
+          fi
+
+  build: 
+    needs: release
+    if: ${{ needs.release.outputs.frontend_version != '' }}
+    runs-on: ubuntu-latest       
+    steps:
+      # Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v4
 
       # Log in to Docker Hub  
       - name: Log in to Docker Hub
@@ -65,7 +83,7 @@ jobs:
           push: true
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/personal-website-frontend:latest
-            ${{ secrets.DOCKERHUB_USERNAME }}/personal-website-frontend:${{ steps.frontend_version.outputs.version }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/personal-website-frontend:${{ needs.release.outputs.frontend_version }}
 
       # Log out from Docker Hub
       - name: Log out from Docker Hub
