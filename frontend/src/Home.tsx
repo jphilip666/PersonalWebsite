@@ -115,7 +115,7 @@ export default function Home() {
             </TableBody>
         </Table>
     </div>
-    <div>
+    <div> 
         <h1 className="text-2xl font-light my-5">KEY COMPETENCIES</h1>
         <p>Problem-Solving & Critical Thinking: tackled security vulnerabilities, improving system integrity and user trust.</p>    
     </div>
