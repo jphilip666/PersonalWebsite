@@ -7,7 +7,7 @@ function App() {
     <>
       <BrowserRouter>
         {/* Routes */}
-        <div className="border rounded-lg p-8 shadow-lg">
+        <div className="border rounded-lg p-4 sm:p-8 shadow-lg">
           <Router />
         </div>
       </BrowserRouter>

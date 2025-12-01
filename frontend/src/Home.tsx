@@ -1,11 +1,13 @@
 import { FaLocationPin, FaEnvelope, FaLinkedin } from "react-icons/fa6";
 import { Separator } from "@/components/ui/separator";
+import { FaGhost } from "react-icons/fa";
+
 
 export default function Home() {
   return <>
     <div className="flex flex-col md:flex-row justify-between">
         <div className="mr-2 mb-2 md:mb-0">
-            <h1 className="text-2xl font-light text-gray-400">Jestin Philip</h1>
+            <h1 className="text-2xl font-light text-gray-400 flex"><FaGhost className="text-cyan-500 mr-2"/>Jestin Philip</h1>
             <h2 className="font-light text-gray-300">Senior Software Engineer & Web Developer</h2>
         </div> 
         <div className="text-xs flex flex-wrap sm:w-88 md:w-97">
@@ -86,7 +88,7 @@ export default function Home() {
                 </div>
             </div>
             <div className="pb-2 mb-2 flex flex-col md:flex-row">
-                <div className="font-medium text-left mr-4 md:w-[30%]">Tools</div>
+                <div className="font-medium text-left border-b border-b-gray-400 pb-2 md:border-b-0 md:w-[30%] md:mr-4">Tools</div>
                 <div className="text-left whitespace-normal md:w-[70%]">
                     Jira, Confluence
                 </div>
